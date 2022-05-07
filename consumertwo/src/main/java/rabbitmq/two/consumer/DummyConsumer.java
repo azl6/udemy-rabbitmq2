@@ -6,7 +6,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import rabbitmq.two.entity.DummyMessage;
 
-@Service
+//@Service
 public class DummyConsumer {
 
     private static final Logger LOG = LoggerFactory.getLogger(DummyConsumer.class);

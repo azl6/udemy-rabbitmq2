@@ -8,6 +8,7 @@ import rabbitmq.two.entity.DummyMessage;
 import rabbitmq.two.producer.DummyProducer;
 
 import java.time.LocalTime;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class ProducertwoApplication implements CommandLineRunner {
@@ -23,5 +24,6 @@ public class ProducertwoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), 1);
 		dummyProducer.sendDummy(dummyMessage);
+		TimeUnit.SECONDS.sleep(1);
 	}
 }
