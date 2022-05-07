@@ -22,8 +22,10 @@ public class ProducertwoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), 1);
-		dummyProducer.sendDummy(dummyMessage);
-		TimeUnit.SECONDS.sleep(1);
+		for(int i=0; i<500; i++){
+			var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), i);
+			dummyProducer.sendDummy(dummyMessage);
+		}
+		System.out.println("All messages were sent.");
 	}
 }

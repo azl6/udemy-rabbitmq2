@@ -1,0 +1,9 @@
+spring:
+  rabbitmq:
+    adresses: localhost:5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        prefetch: 1
+

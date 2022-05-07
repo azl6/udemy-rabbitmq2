@@ -19,7 +19,7 @@ public class RabbitmqScheduler {
     private static final Logger LOG = LoggerFactory.getLogger(DummyConsumer.class);
 
     //stops all listeners at 11PM
-    @Scheduled(cron = "0 0 23 * * *")
+    //@Scheduled(cron = "0 0 23 * * *")
     private void stopAll(){
         registry.getListenerContainers().forEach(listener -> {
             LOG.info("Stopping {}...", listener);
@@ -28,7 +28,7 @@ public class RabbitmqScheduler {
     }
 
     //starts all listeners 1s after midnight
-    @Scheduled(cron = "1 0 0 * * *")
+    //@Scheduled(cron = "1 0 0 * * *")
     private void startAll(){
         registry.getListenerContainers().forEach(listener -> {
             LOG.info("Starting {}...", listener);

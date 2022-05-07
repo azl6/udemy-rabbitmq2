@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rabbitmq.two.entity.DummyMessage;
 
-//@Service
+@Service
 public class DummyProducer {
 
     @Autowired //will use Jackson2JsonMessageConverter, created on config class
