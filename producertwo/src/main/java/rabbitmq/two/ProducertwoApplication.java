@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import rabbitmq.two.entity.DummyMessage;
 import rabbitmq.two.producer.DummyProducer;
+import rabbitmq.two.producer.MultiplePrefetchProducer;
 
 import java.time.LocalTime;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class ProducertwoApplication implements CommandLineRunner {
 
 	@Autowired
-	private DummyProducer dummyProducer;
+	private MultiplePrefetchProducer producer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProducertwoApplication.class, args);
@@ -22,10 +23,8 @@ public class ProducertwoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		for(int i=0; i<500; i++){
-			var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), i);
-			dummyProducer.sendDummy(dummyMessage);
-		}
-		System.out.println("All messages were sent.");
+		producer.simulateTransaction();
+		producer.simulateScheduler();
+		System.out.println("Done");
 	}
 }
