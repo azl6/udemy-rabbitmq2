@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import rabbitmq.two.entity.DummyMessage;
+import rabbitmq.two.entity.InvoiceCancelledMessage;
 import rabbitmq.two.entity.InvoiceCreatedMessage;
 import rabbitmq.two.entity.InvoicePaidMessage;
 import rabbitmq.two.producer.DummyProducer;
@@ -38,5 +39,8 @@ public class ProducertwoApplication implements CommandLineRunner {
 
 		var invoicePaidMessage = new InvoicePaidMessage(randomInvoiceNumber, LocalDate.now(), randomPaymentNumber);
 		producer.sendInvoicePaid(invoicePaidMessage);
+
+		randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(200, 300);
+		producer.sendInvoiceCancelled(new InvoiceCancelledMessage(LocalDate.now(), randomInvoiceNumber, "Just a test"));
 	}
 }
