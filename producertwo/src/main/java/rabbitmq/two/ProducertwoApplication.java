@@ -8,10 +8,7 @@ import rabbitmq.two.entity.DummyMessage;
 import rabbitmq.two.entity.InvoiceCancelledMessage;
 import rabbitmq.two.entity.InvoiceCreatedMessage;
 import rabbitmq.two.entity.InvoicePaidMessage;
-import rabbitmq.two.producer.DummyProducer;
-import rabbitmq.two.producer.InvoiceProducer;
-import rabbitmq.two.producer.MultiplePrefetchProducer;
-import rabbitmq.two.producer.SingleActiveProducer;
+import rabbitmq.two.producer.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class ProducertwoApplication implements CommandLineRunner {
 
 	@Autowired
-	private SingleActiveProducer producer;
+	private ReliableProducer producer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProducertwoApplication.class, args);
@@ -30,6 +27,9 @@ public class ProducertwoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		producer.sendDummy();
+		var msg1 = new DummyMessage("Invalid test", 10);
+		var msg2 = new DummyMessage("Invalid test", 20);
+		producer.sendDummyWithInvalidRoutingKey(msg1);
+		producer.sendDummyToInvalidExchange(msg2);
 	}
 }
