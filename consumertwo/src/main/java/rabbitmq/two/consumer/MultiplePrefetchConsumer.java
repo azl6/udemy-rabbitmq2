@@ -8,7 +8,7 @@ import rabbitmq.two.entity.DummyMessage;
 
 import java.util.concurrent.TimeUnit;
 
-@Service
+//@Service
 public class MultiplePrefetchConsumer {
     private static final Logger LOG = LoggerFactory.getLogger(DummyConsumer.class);
 
