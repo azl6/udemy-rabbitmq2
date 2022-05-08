@@ -11,6 +11,7 @@ import rabbitmq.two.entity.InvoicePaidMessage;
 import rabbitmq.two.producer.DummyProducer;
 import rabbitmq.two.producer.InvoiceProducer;
 import rabbitmq.two.producer.MultiplePrefetchProducer;
+import rabbitmq.two.producer.SingleActiveProducer;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class ProducertwoApplication implements CommandLineRunner {
 
 	@Autowired
-	private InvoiceProducer producer;
+	private SingleActiveProducer producer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProducertwoApplication.class, args);
@@ -29,27 +30,6 @@ public class ProducertwoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		for(int i=0; i<200; i++){
-			var invoiceNumber = "INV-" + (i%60);
-			var invoiceCreatedMessage = new InvoiceCreatedMessage(
-					127.0, LocalDate.now().minusDays(2), "USD", invoiceNumber);
-			producer.sendInvoiceCreated(invoiceCreatedMessage);
-		}
-
-
-//		var randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(100, 200);
-//		var invoiceCreatedMessage = new InvoiceCreatedMessage(
-//				127.0, LocalDate.now().minusDays(2), "USD", randomInvoiceNumber);
-//		producer.sendInvoiceCreated(invoiceCreatedMessage);
-//
-//		randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(200, 300);
-//		var randomPaymentNumber = "PAY-" + ThreadLocalRandom.current().nextInt(800, 1000);
-//
-//		var invoicePaidMessage = new InvoicePaidMessage(randomInvoiceNumber, LocalDate.now(), randomPaymentNumber);
-//		producer.sendInvoicePaid(invoicePaidMessage);
-//
-//		randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(200, 300);
-//		producer.sendInvoiceCancelled(new InvoiceCancelledMessage(LocalDate.now(), randomInvoiceNumber, "Just a test"));
+		producer.sendDummy();
 	}
 }

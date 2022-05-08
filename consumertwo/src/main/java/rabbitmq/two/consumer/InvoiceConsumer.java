@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import rabbitmq.two.entity.InvoiceCreatedMessage;
 import rabbitmq.two.entity.InvoicePaidMessage;
 
-@Service
-@RabbitListener(queues = "q.invoice")
+//@Service
+//@RabbitListener(queues = "q.invoice")
 public class InvoiceConsumer {
 
     private static final Logger LOG = LoggerFactory.getLogger(DummyConsumer.class);

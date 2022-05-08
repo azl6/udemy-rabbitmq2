@@ -8,14 +8,13 @@ import rabbitmq.two.entity.DummyMessage;
 
 import java.util.concurrent.TimeUnit;
 
-//@Service
-public class DummyPrefetchConsumer {
-
+@Service
+public class SingleActiveConsumer {
     private static final Logger LOG = LoggerFactory.getLogger(DummyConsumer.class);
 
-    @RabbitListener(queues = "q.dummy", concurrency = "2")
-    public void listen(DummyMessage msg) throws InterruptedException {
-        LOG.info("Consuming: {}", msg);
-        TimeUnit.SECONDS.sleep(20);
+    @RabbitListener(queues = "q.single", concurrency = "5")
+    public void listenDummy(DummyMessage msg) throws InterruptedException {
+        LOG.info("Message: {}", msg);
+        TimeUnit.SECONDS.sleep(1);
     }
 }
