@@ -16,14 +16,14 @@ public class InvoiceProducer {
     private static final String EXCHANGE = "x.invoice";
 
     public void sendInvoiceCreated(InvoiceCreatedMessage message){
-        rabbitTemplate.convertAndSend(EXCHANGE, "", message);
+        rabbitTemplate.convertAndSend(EXCHANGE, message.getInvoiceNumber(), message);
     }
 
     public void sendInvoicePaid(InvoicePaidMessage message){
-        rabbitTemplate.convertAndSend(EXCHANGE, "", message);
+        rabbitTemplate.convertAndSend(EXCHANGE, message.getInvoiceNumber(), message);
     }
 
     public void sendInvoiceCancelled(InvoiceCancelledMessage message){
-        rabbitTemplate.convertAndSend(EXCHANGE, "", message);
+        rabbitTemplate.convertAndSend(EXCHANGE, message.getInvoiceNumber(), message);
     }
 }
