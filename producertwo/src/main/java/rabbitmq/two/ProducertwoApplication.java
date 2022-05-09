@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class ProducertwoApplication implements CommandLineRunner {
 
 	@Autowired
-	private ReliableProducer producer;
+	private InvoiceProducer producer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProducertwoApplication.class, args);
@@ -27,9 +27,8 @@ public class ProducertwoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		var msg1 = new DummyMessage("Invalid test", 10);
-		var msg2 = new DummyMessage("Invalid test", 20);
-		producer.sendDummyWithInvalidRoutingKey(msg1);
-		producer.sendDummyToInvalidExchange(msg2);
+		for(int i=0; i<10; i++){
+			var message = new InvoiceCancelledMessage(LocalDate.now(), "n", "Test " + i);
+		}
 	}
 }
